@@ -1,0 +1,15 @@
+/////inertia project .htaccess 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+/////git remote branch to local branch all pull cmd
+git status
+git branch -r
+git branch -a
+git fetch origin
+git merge origin/razaan
+git add .
+git commit -m 'update'
+git push origin sojib
