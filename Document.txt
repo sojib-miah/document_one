@@ -13,3 +13,101 @@ git merge origin/razaan
 git add .
 git commit -m 'update'
 git push origin sojib
+
+/////git pull problem solve step by step
+Step 1: নতুন SSH Key তৈরি করুন
+
+ssh-keygen -t ed25519 -C "vacationplanner-cpanel" -f ~/.ssh/vacationplanner
+
+Passphrase চাইলে খালি রাখতে Enter চাপতে পারেন।
+এতে দুটি ফাইল তৈরি হবে:
+- ~/.ssh/vacationplanner — Private Key
+- ~/.ssh/vacationplanner.pub — Public Key
+key authorize korte hobe
+
+Step 2: নতুন Public Key দেখুন
+
+cat ~/.ssh/vacationplanner.pub
+
+সম্পূর্ণ output কপি করুন।
+তারপর GitHub-এ যান:
+GitHub → Settings → SSH and GPG keys1. New SSH Key ক্লিক করুন।
+2. Title: Vacation Planner cPanel
+3. Key type: Authentication Key
+4. Key: আপনার কপি করা Public Key।
+5. Add SSH Key ক্লিক করুন।
+
+Step 3: SSH Configuration পরিবর্তন করুন //create .ssh folder config file
+
+nano ~/.ssh/config
+
+update config file this code.
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/vacationplanner
+    IdentitiesOnly yes
+
+এরপর:
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/vacationplanner
+
+Step 4: Repository access পরীক্ষা করুন
+
+ssh -T git@github.com
+cd ~/vacationplanner.comitsbd.com
+git ls-remote origin
+git fetch origin
+
+/////jodi ager kono project thake
+# Existing project
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa.1788273195
+    IdentitiesOnly yes
+
+# Vacation Planner project
+Host github-vacationplanner
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/vacationplanner
+    IdentitiesOnly yes
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/vacationplanner
+cd ~/vacationplanner.comitsbd.com
+git remote -v
+git remote set-url origin git@github-vacationplanner:Commits-Office/travel-vacation-planner.git
+ssh -T git@github-vacationplanner
+git ls-remote origin
+git fetch origin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
